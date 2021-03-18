@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   ChakraProvider,
   Box,
@@ -8,10 +8,10 @@ import {
   Code,
   Grid,
   theme,
-} from "@chakra-ui/react";
-import { Logo } from "./Logo";
+} from '@chakra-ui/react';
+import { Logo } from './Logo';
 
-export const App = () => (
+export const MyApp: React.FC = () => (
   <ChakraProvider theme={theme}>
     <Box textAlign="center" fontSize="xl">
       <Grid minH="100vh" p={3}>
@@ -34,3 +34,5 @@ export const App = () => (
     </Box>
   </ChakraProvider>
 );
+
+export default MyApp;
