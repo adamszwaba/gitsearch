@@ -6,12 +6,16 @@ import {
   Container,
   extendTheme,
   FormControl,
+  FormErrorMessage,
   Input,
   InputGroup,
   InputLeftElement,
 } from '@chakra-ui/react';
 
 import { SearchIcon } from '@chakra-ui/icons';
+import { useForm } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
+import Joi from 'joi';
 
 const theme = extendTheme({
   fonts: {
@@ -46,18 +50,38 @@ const theme = extendTheme({
   },
 });
 
+const validationSchema = Joi.object({ name: Joi.string().min(1) });
+
 export const MyApp: React.FC = () => {
-  console.log(theme);
+  const { handleSubmit, errors, register, formState } = useForm({
+    mode: 'onSubmit',
+    resolver: joiResolver(validationSchema),
+  });
+  const onSubmit = (data: any) => {
+    return new Promise<void>((resolve) => {
+      setTimeout(() => {
+        alert(JSON.stringify(data, null, 2));
+        resolve();
+      }, 800);
+    });
+  };
   return (
     <ChakraProvider theme={theme}>
       <Box shadow="base">
-        <Container padding="6" height="84px">
+        <Container
+          as="form"
+          padding="6"
+          height="84px"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <FormControl display="flex" flexDirection="row">
             <InputGroup>
               <InputLeftElement pointerEvents="none" height="9" width="8">
                 <SearchIcon color="#4F4F4F" w="15.71px" h="15.71px" />
               </InputLeftElement>
               <Input
+                name="name"
+                ref={register}
                 height="9"
                 borderRadius="lg"
                 fontSize="sm"
@@ -67,6 +91,9 @@ export const MyApp: React.FC = () => {
                 type="text"
                 placeholder="Search for users"
               />
+              <FormErrorMessage>
+                {errors.name && errors.name.message}
+              </FormErrorMessage>
             </InputGroup>
             <Button
               fontStyle="normal"
@@ -82,7 +109,7 @@ export const MyApp: React.FC = () => {
               backgroundColor="main"
               colorScheme="main"
               type="submit"
-              isLoading={false}
+              isLoading={formState.isSubmitting}
               loadingText="Searching"
             >
               Search
