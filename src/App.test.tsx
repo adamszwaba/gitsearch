@@ -17,7 +17,7 @@ describe('properly tested app', () => {
     expect(searchBar.value).toBe('adamszwaba');
     fireEvent.click(button);
     await screen.findByText('Adam Szwaba');
-    const results = screen.findAllByTestId('result');
+    const results = await screen.findAllByTestId('result');
     expect(results).toHaveLength(3);
   });
 });
