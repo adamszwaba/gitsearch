@@ -1,13 +1,23 @@
 import React from 'react';
-import { screen } from '@testing-library/react';
+import { findByText, fireEvent, screen } from '@testing-library/react';
 import { render } from './test-utils';
 import { MyApp } from './App';
 
-test('renders search bar and button', () => {
+describe('properly tested app', () => {
   render(<MyApp />);
 
   const searchBar = screen.getByRole('input');
   const button = screen.getByRole('button');
-  expect(searchBar).toBeInTheDocument();
-  expect(button).toBeInTheDocument();
+  it('renders search bar and button', () => {
+    expect(searchBar).toBeInTheDocument();
+    expect(button).toBeInTheDocument();
+  });
+  it('would have tested form behaviour', async () => {
+    fireEvent.change(searchBar, { target: { value: 'adamszwaba' } });
+    expect(searchBar.value).toBe('adamszwaba');
+    fireEvent.click(button);
+    await screen.findByText('Adam Szwaba');
+    const results = screen.findAllByTestId('result');
+    expect(results).toHaveLength(3);
+  });
 });

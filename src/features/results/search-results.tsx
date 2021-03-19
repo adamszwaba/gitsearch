@@ -10,8 +10,15 @@ function SearchResults(): ReactElement {
     user: { loading, data, repos },
   } = useSearchContext();
   return (
-    <Container mt="6" backgroundColor="transparent" padding="6">
-      <Skeleton isLoaded={!loading}>
+    <Container>
+      <Skeleton
+        as="main"
+        data-testid="skeleton"
+        isLoaded={!loading}
+        mt="6"
+        backgroundColor="transparent"
+        padding="6"
+      >
         {data && <User user={data} />}
         <Repos repositories={repos} />
       </Skeleton>

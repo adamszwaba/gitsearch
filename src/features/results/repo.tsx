@@ -6,6 +6,7 @@ type Props = { repo: Repository };
 
 const Repo: React.FC<Props> = ({ repo }) => (
   <Link
+    data-testid="result"
     fontSize="sm"
     lineHeight="4"
     color="#2F80ED"
