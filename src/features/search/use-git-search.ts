@@ -7,6 +7,7 @@ import { Repository, UserData, useSearchContext } from './search-context';
 
 const validationSchema = Joi.object({ name: Joi.string().min(1) });
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const useGitSearch = () => {
   const { setLoading, setRepos, setUserData } = useSearchContext();
   const [userName, setUsername] = React.useState<string>('');
