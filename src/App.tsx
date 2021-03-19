@@ -3,6 +3,7 @@ import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 
 import SearchBox from './features/search/search-box';
 import { SearchProvider } from './features/search/search-context';
+import SearchResults from './features/search/search-results';
 
 const theme = extendTheme({
   fonts: {
@@ -23,6 +24,7 @@ const theme = extendTheme({
         '-webkit-font-smoothing': 'antialiased',
         '-moz-osx-font-smoothing': 'grayscale',
         fontSize: '16px',
+        backgroundColor: '#FBFCFD',
       },
       html: {
         backgroundColor: '#FBFCFD',
@@ -42,6 +44,7 @@ export const MyApp: React.FC = () => {
     <ChakraProvider theme={theme}>
       <SearchProvider>
         <SearchBox />
+        <SearchResults />
       </SearchProvider>
     </ChakraProvider>
   );

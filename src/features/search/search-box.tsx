@@ -14,7 +14,7 @@ import useGitSearch from './use-git-search';
 export default function SearchBox(): ReactElement {
   const { register, loading, onSubmit } = useGitSearch();
   return (
-    <Box shadow="base">
+    <Box shadow="base" backgroundColor="white">
       <Container as="form" padding="6" height="84px" onSubmit={onSubmit}>
         <FormControl display="flex" flexDirection="row">
           <InputGroup>
@@ -25,11 +25,13 @@ export default function SearchBox(): ReactElement {
               name="name"
               ref={register}
               height="9"
+              backgroundColor="#F0F3F4"
               borderRadius="lg"
               fontSize="sm"
               lineHeight="8"
               paddingLeft="8"
               variant="filled"
+              _placeholder={{ color: '#9E9E9E' }}
               type="text"
               placeholder="Search for users"
             />
@@ -49,7 +51,6 @@ export default function SearchBox(): ReactElement {
             colorScheme="main"
             type="submit"
             isLoading={loading}
-            loadingText="Searching"
           >
             Search
           </Button>
