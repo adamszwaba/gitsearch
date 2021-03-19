@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { joiResolver } from '@hookform/resolvers/joi';
-import Joi from 'joi';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import useFetch from 'use-http';
 import { Repository, UserData, useSearchContext } from './search-context';
 
-const validationSchema = Joi.object({ name: Joi.string().min(1) });
+const validationSchema = yup.object({ name: yup.string().min(1) });
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const useGitSearch = () => {
@@ -16,7 +16,7 @@ const useGitSearch = () => {
   );
   const { handleSubmit, register, formState } = useForm({
     mode: 'onSubmit',
-    resolver: joiResolver(validationSchema),
+    resolver: yupResolver(validationSchema),
   });
   const onSubmit = (data: { name: string }) => {
     setUsername(data.name);
@@ -30,8 +30,9 @@ const useGitSearch = () => {
       try {
         const userData: UserData = await get(`${userName}`);
         let repos: Repository[] = [];
+        const { avatar_url, name, bio } = userData;
         if (response.ok) {
-          setUserData(userData);
+          setUserData({ avatar_url, name, bio });
           repos = await get(`${userName}/repos`);
           repos.sort(
             (repoA, repoB) => repoB.stargazers_count - repoA.stargazers_count
