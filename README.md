@@ -1,7 +1,3 @@
-# The task
-
-It was simple! I really liked the amount of work someone put into the clean, clean design. Was fun to work with.
-
 ## The tests
 
 In `App.test.tsx` you will find the kind of tests I would normally do for an app like this. For some reason (and it's almost 9 PM here when I'm doing this, since I hadn't time before), Jest throws a
