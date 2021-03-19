@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { VStack, Text } from '@chakra-ui/react';
+import { nanoid } from 'nanoid';
 import { Repository } from '../search/search-context';
 import Repo from './repo';
 
@@ -21,7 +22,7 @@ const Repos: React.FC<Props> = ({ repositories }) => {
           Top repositories
         </Text>
         {repositories.slice(0, 3).map((repo) => (
-          <Repo repo={repo} />
+          <Repo key={nanoid()} repo={repo} />
         ))}
       </VStack>
     );
