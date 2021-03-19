@@ -38,6 +38,7 @@ const useGitSearch = () => {
           setRepos(repos);
         }
       } catch (err) {
+        // eslint-disable-next-line no-console
         console.log(err);
       } finally {
         setLoading(false);

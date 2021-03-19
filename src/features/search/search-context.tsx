@@ -32,7 +32,8 @@ const initialState: ISearchContext = {
 
 const SearchContext = React.createContext<ISearchContext>(initialState);
 
-export const useSearchContext = () => React.useContext(SearchContext);
+export const useSearchContext = (): ISearchContext =>
+  React.useContext(SearchContext);
 
 export const SearchProvider: React.FC = ({ children }) => {
   const [userData, setUserData] = React.useState<UserData>();
