@@ -3,8 +3,11 @@ import { screen } from '@testing-library/react';
 import { render } from './test-utils';
 import { MyApp } from './App';
 
-test('renders learn react link', () => {
+test('renders search bar and button', () => {
   render(<MyApp />);
-  const linkElement = screen.getByText(/learn chakra/i);
-  expect(linkElement).toBeInTheDocument();
+
+  const searchBar = screen.getByRole('input');
+  const button = screen.getByRole('button');
+  expect(searchBar).toBeInTheDocument();
+  expect(button).toBeInTheDocument();
 });
