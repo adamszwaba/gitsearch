@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export type UserData = { name: string; bio: string };
+export type UserData = { avatar_url: string; name: string; bio: string };
 
 export type Repository = {
   name: string;
