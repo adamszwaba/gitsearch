@@ -1,3 +1,4 @@
+import React, { ReactElement } from 'react';
 import { SearchIcon } from '@chakra-ui/icons';
 import {
   Box,
@@ -8,34 +9,13 @@ import {
   Input,
   Button,
 } from '@chakra-ui/react';
-import { joiResolver } from '@hookform/resolvers/joi';
-import Joi from 'joi';
-import React, { ReactElement } from 'react';
-import { useForm } from 'react-hook-form';
-
-const validationSchema = Joi.object({ name: Joi.string().min(1) });
+import useGitSearch from './use-git-search';
 
 export default function SearchBox(): ReactElement {
-  const { handleSubmit, register, formState } = useForm({
-    mode: 'onSubmit',
-    resolver: joiResolver(validationSchema),
-  });
-  const onSubmit = (data: any) => {
-    return new Promise<void>((resolve) => {
-      setTimeout(() => {
-        alert(JSON.stringify(data, null, 2));
-        resolve();
-      }, 800);
-    });
-  };
+  const { register, loading, onSubmit } = useGitSearch();
   return (
     <Box shadow="base">
-      <Container
-        as="form"
-        padding="6"
-        height="84px"
-        onSubmit={handleSubmit(onSubmit)}
-      >
+      <Container as="form" padding="6" height="84px" onSubmit={onSubmit}>
         <FormControl display="flex" flexDirection="row">
           <InputGroup>
             <InputLeftElement pointerEvents="none" height="9" width="8">
@@ -68,7 +48,7 @@ export default function SearchBox(): ReactElement {
             backgroundColor="main"
             colorScheme="main"
             type="submit"
-            isLoading={formState.isSubmitting}
+            isLoading={loading}
             loadingText="Searching"
           >
             Search
